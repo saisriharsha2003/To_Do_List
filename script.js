@@ -9,7 +9,15 @@ function addTask() {
   }
 
   const li = document.createElement('li');
-  li.className = 'task-item'; // Add a class to the li element for styling purposes
+  li.className = 'task-item';
+
+  // Create a span element for the edit symbol (pencil icon)
+  const editIcon = document.createElement('span');
+  editIcon.innerHTML = '&#9998;'; // Pencil icon HTML code
+  editIcon.className = 'edit-task'; // Add a class for styling purposes
+  editIcon.addEventListener('click', function (event) {
+    editTaskName(event.target.closest('.task-item'));
+  });
 
   // Create a span element for the task name
   const taskName = document.createElement('span');
@@ -31,6 +39,7 @@ function addTask() {
     removeTask(li);
   });
 
+  li.appendChild(editIcon);
   li.appendChild(taskName);
   li.appendChild(completedButton);
   li.appendChild(removeButton);
@@ -97,6 +106,14 @@ function loadTasksFromLocalStorage() {
       const li = document.createElement('li');
       li.className = 'task-item';
 
+      // Create a span element for the edit symbol (pencil icon)
+      const editIcon = document.createElement('span');
+      editIcon.innerHTML = '&#9998;'; // Pencil icon HTML code
+      editIcon.className = 'edit-task';
+      editIcon.addEventListener('click', function (event) {
+        editTaskName(event.target.closest('.task-item'));
+      });
+
       // Create a span element for the task name
       const taskName = document.createElement('span');
       taskName.innerText = task.text;
@@ -117,6 +134,7 @@ function loadTasksFromLocalStorage() {
         removeTask(li);
       });
 
+      li.appendChild(editIcon);
       li.appendChild(taskName);
       li.appendChild(completedButton);
       li.appendChild(removeButton);
@@ -139,9 +157,12 @@ document.getElementById('taskInput').addEventListener('keyup', function (event) 
 
 // Add event listener to allow task name editing when clicked
 document.getElementById('taskList').addEventListener('click', function (event) {
-  const taskElement = event.target.closest('.task-item');
-  if (taskElement) {
-    editTaskName(taskElement);
+  const editIcon = event.target.closest('.edit-task');
+  if (editIcon) {
+    const taskElement = editIcon.closest('.task-item');
+    if (taskElement) {
+      editTaskName(taskElement);
+    }
   }
 });
 
