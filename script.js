@@ -10,10 +10,28 @@ function addTask() {
 
   const li = document.createElement('li');
   li.innerText = taskText;
+
+  // Create a "Completed" button for the task
+  const completedButton = document.createElement('button');
+  completedButton.innerText = 'Completed';
+  completedButton.addEventListener('click', function () {
+    removeTask(li);
+  });
+
+  li.appendChild(completedButton);
   taskList.appendChild(li);
   taskInput.value = '';
 
   // Save the tasks to Local Storage
+  saveTasksToLocalStorage();
+}
+
+// Function to remove a task from the list and update Local Storage
+function removeTask(taskElement) {
+  const taskList = document.getElementById('taskList');
+  taskList.removeChild(taskElement);
+
+  // Save the tasks to Local Storage after removing the task
   saveTasksToLocalStorage();
 }
 
@@ -40,6 +58,15 @@ function loadTasksFromLocalStorage() {
     tasks.forEach(taskText => {
       const li = document.createElement('li');
       li.innerText = taskText;
+
+      // Create a "Completed" button for the task
+      const completedButton = document.createElement('button');
+      completedButton.innerText = 'Completed';
+      completedButton.addEventListener('click', function () {
+        removeTask(li);
+      });
+
+      li.appendChild(completedButton);
       taskList.appendChild(li);
     });
   }
