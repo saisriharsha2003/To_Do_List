@@ -95,6 +95,41 @@ function saveTasksToLocalStorage() {
   // Save the tasks array to Local Storage as a JSON string
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
+// ...
+
+// Function to filter and display all tasks
+function showAllTasks() {
+  const allTasks = document.querySelectorAll('.task-item');
+  allTasks.forEach(task => {
+    task.style.display = 'flex';
+  });
+}
+
+// Function to filter and display completed tasks
+function showCompletedTasks() {
+  const completedTasks = document.querySelectorAll('.task-item.completed');
+  const pendingTasks = document.querySelectorAll('.task-item:not(.completed)');
+  completedTasks.forEach(task => {
+    task.style.display = 'flex';
+  });
+  pendingTasks.forEach(task => {
+    task.style.display = 'none';
+  });
+}
+
+// Function to filter and display pending tasks
+function showPendingTasks() {
+  const completedTasks = document.querySelectorAll('.task-item.completed');
+  const pendingTasks = document.querySelectorAll('.task-item:not(.completed)');
+  pendingTasks.forEach(task => {
+    task.style.display = 'flex';
+  });
+  completedTasks.forEach(task => {
+    task.style.display = 'none';
+  });
+}
+
+// ...
 
 // Function to load tasks from Local Storage on page load
 function loadTasksFromLocalStorage() {

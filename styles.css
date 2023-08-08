@@ -112,3 +112,26 @@ box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 button {
 margin-left: 10px;
 }
+/* ... (previous CSS rules) */
+
+.task-sections {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.task-sections button {
+  padding: 8px 20px;
+  margin: 0 5px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.task-sections button:hover {
+  background-color: #0056b3;
+}
