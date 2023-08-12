@@ -1,4 +1,3 @@
-/* styles.css */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -37,6 +36,16 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
+  }
+  .search-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .task-sections {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
   }
   
   button {
