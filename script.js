@@ -4,15 +4,16 @@ function addTask() {
   const deadlineInput = document.getElementById('deadlineInput');
   const taskList = document.getElementById('taskList');
   const taskText = taskInput.value.trim();
-  const deadlineText = deadlineInput.value.trim();
+  const taskDeadline = deadlineInput.value;
 
-  if (taskText === '' || deadlineText === '') {
+  if (taskText === '') {
     return;
   }
 
   const li = document.createElement('li');
   li.className = 'task-item';
 
+  // Create a span element for the edit symbol (pencil icon)
   const editIcon = document.createElement('span');
   editIcon.innerHTML = '&#9998;';
   editIcon.className = 'edit-task';
@@ -20,20 +21,24 @@ function addTask() {
     editTaskName(event.target.closest('.task-item'));
   });
 
+  // Create a span element for the task name
   const taskName = document.createElement('span');
   taskName.innerText = taskText;
   taskName.className = 'task-name';
 
-  const taskDeadline = document.createElement('span');
-  taskDeadline.innerText = `${deadlineText}`;
-  taskDeadline.className = 'task-deadline';
+  // Create a span element for the task deadline
+  const taskDeadlineSpan = document.createElement('span');
+  taskDeadlineSpan.innerText = `Deadline: ${taskDeadline}`;
+  taskDeadlineSpan.className = 'task-deadline';
 
+  // Create a "Completed" button for the task
   const completedButton = document.createElement('button');
   completedButton.innerText = 'Completed';
   completedButton.addEventListener('click', function () {
     markCompleted(li);
   });
 
+  // Create a "Remove" button for the task
   const removeButton = document.createElement('button');
   removeButton.innerText = 'Remove';
   removeButton.style.backgroundColor = 'red';
@@ -43,49 +48,77 @@ function addTask() {
 
   li.appendChild(editIcon);
   li.appendChild(taskName);
-  li.appendChild(taskDeadline);
+  li.appendChild(taskDeadlineSpan);
   li.appendChild(completedButton);
   li.appendChild(removeButton);
-  taskList.appendChild(li);
-  taskInput.value = '';
-  deadlineInput.value = '';
 
+  // Find the correct position to insert the new task based on deadline
+  let insertIndex = 0;
+  const taskItems = taskList.getElementsByClassName('task-item');
+  for (let i = 0; i < taskItems.length; i++) {
+    const itemDeadline = new Date(taskItems[i].querySelector('.task-deadline').innerText.split(': ')[1]);
+    if (new Date(taskDeadline) <= itemDeadline) {
+      insertIndex = i;
+      break;
+    }
+  }
+  taskList.insertBefore(li, taskItems[insertIndex]);
+
+  taskInput.value = '';
+  deadlineInput.value = ''; // Clear the deadline input
+
+  // Save the tasks to Local Storage
   saveTasksToLocalStorage();
-  sortTasksByDeadline();
 }
+
+
 
 // Function to mark a task as completed and update Local Storage
 function markCompleted(taskElement) {
   taskElement.classList.toggle('completed');
+
+  // Save the tasks to Local Storage after marking as completed
   saveTasksToLocalStorage();
-  sortTasksByDeadline();
 }
 
 // Function to remove a task from the list and update Local Storage
 function removeTask(taskElement) {
   const taskList = document.getElementById('taskList');
   taskList.removeChild(taskElement);
+
+  // Save the tasks to Local Storage after removing the task
   saveTasksToLocalStorage();
-  sortTasksByDeadline();
 }
 
 // Function to edit a task name and update Local Storage
 function editTaskName(taskElement) {
   const taskName = taskElement.querySelector('.task-name');
-  const taskDeadline = taskElement.querySelector('.task-deadline');
   const currentText = taskName.innerText;
-  const currentDeadline = taskDeadline.innerText.substr(10);
-
   const newText = prompt('Edit task name:', currentText);
-  const newDeadline = prompt('Edit deadline:', currentDeadline);
 
-  if (newText !== null && newText.trim() !== '' && newDeadline !== null && newDeadline.trim() !== '') {
+  if (newText !== null && newText.trim() !== '') {
     taskName.innerText = newText.trim();
-    taskDeadline.innerText = `Deadline: ${newDeadline.trim()}`;
     saveTasksToLocalStorage();
-    sortTasksByDeadline();
   }
 }
+
+// Function to save tasks to Local Storage
+function saveTasksToLocalStorage() {
+  const taskList = document.getElementById('taskList');
+  const tasks = [];
+
+  // Iterate through each task in the list and save them to the tasks array
+  taskList.querySelectorAll('.task-item').forEach(task => {
+    tasks.push({
+      text: task.querySelector('.task-name').innerText,
+      completed: task.classList.contains('completed')
+    });
+  });
+
+  // Save the tasks array to Local Storage as a JSON string
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+// ...
 
 // Function to filter and display all tasks
 function showAllTasks() {
@@ -119,21 +152,7 @@ function showPendingTasks() {
   });
 }
 
-// Function to save tasks to Local Storage
-function saveTasksToLocalStorage() {
-  const taskList = document.getElementById('taskList');
-  const tasks = [];
-
-  taskList.querySelectorAll('.task-item').forEach(task => {
-    tasks.push({
-      text: task.querySelector('.task-name').innerText,
-      completed: task.classList.contains('completed'),
-      deadline: task.querySelector('.task-deadline').innerText.substr(10)
-    });
-  });
-
-  localStorage.setItem('tasks', JSON.stringify(tasks));
-}
+// ...
 
 // Function to load tasks from Local Storage on page load
 function loadTasksFromLocalStorage() {
@@ -141,31 +160,32 @@ function loadTasksFromLocalStorage() {
   const tasks = JSON.parse(localStorage.getItem('tasks'));
 
   if (tasks && tasks.length > 0) {
+    tasks.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
     tasks.forEach(task => {
       const li = document.createElement('li');
       li.className = 'task-item';
 
+      // Create a span element for the edit symbol (pencil icon)
       const editIcon = document.createElement('span');
-      editIcon.innerHTML = '&#9998;';
+      editIcon.innerHTML = '&#9998;'; // Pencil icon HTML code
       editIcon.className = 'edit-task';
       editIcon.addEventListener('click', function (event) {
         editTaskName(event.target.closest('.task-item'));
       });
 
+      // Create a span element for the task name
       const taskName = document.createElement('span');
       taskName.innerText = task.text;
       taskName.className = 'task-name';
 
-      const taskDeadline = document.createElement('span');
-      taskDeadline.innerText = `Deadline: ${task.deadline}`;
-      taskDeadline.className = 'task-deadline';
-
+      // Create a "Completed" button for the task
       const completedButton = document.createElement('button');
       completedButton.innerText = 'Completed';
       completedButton.addEventListener('click', function () {
         markCompleted(li);
       });
 
+      // Create a "Remove" button for the task
       const removeButton = document.createElement('button');
       removeButton.innerText = 'Remove';
       removeButton.style.backgroundColor = 'red';
@@ -173,50 +193,24 @@ function loadTasksFromLocalStorage() {
         removeTask(li);
       });
 
+       // Create a span element for the task deadline
+      const taskDeadlineSpan = document.createElement('span');
+      taskDeadlineSpan.innerText = `Deadline: ${task.deadline}`;
+      taskDeadlineSpan.className = 'task-deadline';
+
       li.appendChild(editIcon);
       li.appendChild(taskName);
-      li.appendChild(taskDeadline);
+      li.appendChild(taskDeadlineSpan); // Add the deadline span
       li.appendChild(completedButton);
       li.appendChild(removeButton);
       taskList.appendChild(li);
 
+      // If the task is marked as completed, add the completed class
       if (task.completed) {
         li.classList.add('completed');
       }
     });
   }
-}
-
-// Function to sort tasks by deadline
-function sortTasksByDeadline() {
-  const taskList = document.getElementById('taskList');
-  const tasks = Array.from(taskList.children);
-
-  tasks.sort((a, b) => {
-    const aDeadline = new Date(getDeadlineFromElement(a));
-    const bDeadline = new Date(getDeadlineFromElement(b));
-
-    if (aDeadline < bDeadline) {
-      return -1;
-    } else if (aDeadline > bDeadline) {
-      return 1;
-    } else {
-      return tasks.indexOf(a) - tasks.indexOf(b);
-    }
-  });
-
-  for (const task of tasks) {
-    taskList.removeChild(task);
-  }
-
-  for (const task of tasks) {
-    taskList.appendChild(task);
-  }
-}
-
-// Function to extract deadline from task element
-function getDeadlineFromElement(taskElement) {
-  return taskElement.querySelector('.task-deadline').innerText.substr(10);
 }
 
 // Add event listener to the Add button
@@ -236,7 +230,47 @@ document.getElementById('taskList').addEventListener('click', function (event) {
     }
   }
 });
+// ...
+let draggedTask = null;
+
+// Function to handle the start of a drag
+function handleDragStart(event) {
+  draggedTask = event.target.closest('.task-item');
+}
+
+// Function to handle the drag over a valid drop target
+function handleDragOver(event) {
+  event.preventDefault();
+}
+
+// Function to handle the drop of a dragged task
+function handleDrop(event) {
+  event.preventDefault();
+  
+  if (draggedTask !== null) {
+    const dropTarget = event.target.closest('.task-item');
+    if (dropTarget !== null) {
+      const taskList = document.getElementById('taskList');
+      const dropIndex = Array.from(taskList.children).indexOf(dropTarget);
+      const draggedIndex = Array.from(taskList.children).indexOf(draggedTask);
+      
+      if (draggedIndex !== dropIndex) {
+        taskList.removeChild(draggedTask);
+        taskList.insertBefore(draggedTask, dropIndex > draggedIndex ? dropTarget.nextSibling : dropTarget);
+        
+        // Save the updated tasks order to Local Storage
+        saveTasksToLocalStorage();
+      }
+    }
+  }
+}
+
+// Add event listeners for drag-and-drop
+document.addEventListener('dragstart', handleDragStart);
+document.addEventListener('dragover', handleDragOver);
+document.addEventListener('drop', handleDrop);
+// ...
+
 
 // Load tasks from Local Storage on page load
 loadTasksFromLocalStorage();
-sortTasksByDeadline();
