@@ -5,11 +5,14 @@ function addTask() {
   const taskList = document.getElementById('taskList');
   const taskText = taskInput.value.trim();
   const taskDeadline = deadlineInput.value;
+  
   if (taskText === '') {
     return;
   }
+  
   const li = document.createElement('li');
   li.className = 'task-item';
+  
   // Create a span element for the edit symbol (pencil icon)
   const editIcon = document.createElement('span');
   editIcon.innerHTML = '✎';
@@ -17,20 +20,24 @@ function addTask() {
   editIcon.addEventListener('click', function (event) {
     editTaskName(event.target.closest('.task-item'));
   });
+  
   // Create a span element for the task name
   const taskName = document.createElement('span');
   taskName.innerText = taskText;
   taskName.className = 'task-name';
+  
   // Create a span element for the task deadline
   const taskDeadlineSpan = document.createElement('span');
   taskDeadlineSpan.innerText = `Deadline: ${taskDeadline}`;
   taskDeadlineSpan.className = 'task-deadline';
+  
   // Create a "Completed" button for the task
   const completedButton = document.createElement('button');
   completedButton.innerText = 'Completed';
   completedButton.addEventListener('click', function () {
     markCompleted(li);
   });
+  
   // Create a "Remove" button for the task
   const removeButton = document.createElement('button');
   removeButton.innerText = 'Remove';
@@ -38,25 +45,36 @@ function addTask() {
   removeButton.addEventListener('click', function () {
     removeTask(li);
   });
-
-  // Find the correct position to insert the new task based on deadline
-  let insertIndex;
-  for (insertIndex=0; insertIndex<taskList.children.length; insertIndex++) {
-    let currentTaskDeadline=taskList.children[insertIndex].querySelector('.task-deadline').innerText.split(':')[1].trim();
-    if (new Date(currentTaskDeadline)>new Date(taskDeadline)) {
-      break;
-    }
-  }
+  
   li.appendChild(editIcon);
   li.appendChild(taskName);
   li.appendChild(taskDeadlineSpan);
   li.appendChild(completedButton);
   li.appendChild(removeButton);
-  taskList.insertBefore(li,taskList.children[insertIndex]);
+
+  let insertIndex;
+  const taskItems = taskList.getElementsByClassName('task-item');
+  for (insertIndex = 0; insertIndex < taskItems.length; insertIndex++) {
+    let currentTaskDeadline = taskItems[insertIndex].querySelector('.task-deadline').innerText.split(': ')[1].trim();
+    if (new Date(currentTaskDeadline) > new Date(taskDeadline)) {
+      break;
+    }
+  }
+
+  if (insertIndex === taskItems.length) {
+    taskList.appendChild(li); // If new task has the latest deadline
+  } else {
+    taskList.insertBefore(li, taskItems[insertIndex]); // Insert before the task with later deadline
+  }
+
   taskInput.value = '';
-  deadlineInput.value = '';
+  deadlineInput.value = ''; // Clear the deadline input
+
+  // Save the tasks to Local Storage
   saveTasksToLocalStorage();
 }
+
+
 
 // Function to mark a task as completed and update Local Storage
 function markCompleted(taskElement) {
@@ -96,7 +114,8 @@ function saveTasksToLocalStorage() {
   taskList.querySelectorAll('.task-item').forEach(task => {
     tasks.push({
       text: task.querySelector('.task-name').innerText,
-      completed: task.classList.contains('completed')
+      completed: task.classList.contains('completed'),
+      deadline: task.querySelector('.task-deadline').innerText.split(': ')[1]
     });
   });
 
@@ -135,8 +154,6 @@ function showPendingTasks() {
     task.style.display = 'none';
   });
 }
-
-// ...
 
 // Function to load tasks from Local Storage on page load
 function loadTasksFromLocalStorage() {
@@ -214,47 +231,6 @@ document.getElementById('taskList').addEventListener('click', function (event) {
     }
   }
 });
-// ...
-let draggedTask = null;
-
-// Function to handle the start of a drag
-function handleDragStart(event) {
-  draggedTask = event.target.closest('.task-item');
-}
-
-// Function to handle the drag over a valid drop target
-function handleDragOver(event) {
-  event.preventDefault();
-}
-
-// Function to handle the drop of a dragged task
-function handleDrop(event) {
-  event.preventDefault();
-  
-  if (draggedTask !== null) {
-    const dropTarget = event.target.closest('.task-item');
-    if (dropTarget !== null) {
-      const taskList = document.getElementById('taskList');
-      const dropIndex = Array.from(taskList.children).indexOf(dropTarget);
-      const draggedIndex = Array.from(taskList.children).indexOf(draggedTask);
-      
-      if (draggedIndex !== dropIndex) {
-        taskList.removeChild(draggedTask);
-        taskList.insertBefore(draggedTask, dropIndex > draggedIndex ? dropTarget.nextSibling : dropTarget);
-        
-        // Save the updated tasks order to Local Storage
-        saveTasksToLocalStorage();
-      }
-    }
-  }
-}
-
-// Add event listeners for drag-and-drop
-document.addEventListener('dragstart', handleDragStart);
-document.addEventListener('dragover', handleDragOver);
-document.addEventListener('drop', handleDrop);
-// ...
-
 
 // Load tasks from Local Storage on page load
 loadTasksFromLocalStorage();
