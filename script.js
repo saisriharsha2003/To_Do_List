@@ -5,39 +5,32 @@ function addTask() {
   const taskList = document.getElementById('taskList');
   const taskText = taskInput.value.trim();
   const taskDeadline = deadlineInput.value;
-
   if (taskText === '') {
     return;
   }
-
   const li = document.createElement('li');
   li.className = 'task-item';
-
   // Create a span element for the edit symbol (pencil icon)
   const editIcon = document.createElement('span');
-  editIcon.innerHTML = '&#9998;';
+  editIcon.innerHTML = '✎';
   editIcon.className = 'edit-task';
   editIcon.addEventListener('click', function (event) {
     editTaskName(event.target.closest('.task-item'));
   });
-
   // Create a span element for the task name
   const taskName = document.createElement('span');
   taskName.innerText = taskText;
   taskName.className = 'task-name';
-
   // Create a span element for the task deadline
   const taskDeadlineSpan = document.createElement('span');
   taskDeadlineSpan.innerText = `Deadline: ${taskDeadline}`;
   taskDeadlineSpan.className = 'task-deadline';
-
   // Create a "Completed" button for the task
   const completedButton = document.createElement('button');
   completedButton.innerText = 'Completed';
   completedButton.addEventListener('click', function () {
     markCompleted(li);
   });
-
   // Create a "Remove" button for the task
   const removeButton = document.createElement('button');
   removeButton.innerText = 'Remove';
@@ -46,32 +39,24 @@ function addTask() {
     removeTask(li);
   });
 
+  // Find the correct position to insert the new task based on deadline
+  let insertIndex;
+  for (insertIndex=0; insertIndex<taskList.children.length; insertIndex++) {
+    let currentTaskDeadline=taskList.children[insertIndex].querySelector('.task-deadline').innerText.split(':')[1].trim();
+    if (new Date(currentTaskDeadline)>new Date(taskDeadline)) {
+      break;
+    }
+  }
   li.appendChild(editIcon);
   li.appendChild(taskName);
   li.appendChild(taskDeadlineSpan);
   li.appendChild(completedButton);
   li.appendChild(removeButton);
-
-  // Find the correct position to insert the new task based on deadline
-  let insertIndex = 0;
-  const taskItems = taskList.getElementsByClassName('task-item');
-  for (let i = 0; i < taskItems.length; i++) {
-    const itemDeadline = new Date(taskItems[i].querySelector('.task-deadline').innerText.split(': ')[1]);
-    if (new Date(taskDeadline) <= itemDeadline) {
-      insertIndex = i;
-      break;
-    }
-  }
-  taskList.insertBefore(li, taskItems[insertIndex]);
-
+  taskList.insertBefore(li,taskList.children[insertIndex]);
   taskInput.value = '';
-  deadlineInput.value = ''; // Clear the deadline input
-
-  // Save the tasks to Local Storage
+  deadlineInput.value = '';
   saveTasksToLocalStorage();
 }
-
-
 
 // Function to mark a task as completed and update Local Storage
 function markCompleted(taskElement) {
@@ -118,7 +103,6 @@ function saveTasksToLocalStorage() {
   // Save the tasks array to Local Storage as a JSON string
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
-// ...
 
 // Function to filter and display all tasks
 function showAllTasks() {
