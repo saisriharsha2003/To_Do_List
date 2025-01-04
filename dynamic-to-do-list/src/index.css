@@ -1,9 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 /* styles.css */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #f7f7f7;
-  background-image: url("./todolist.jpg");
+  background-image: url("../src/assets/todolist.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   backface-visibility: visible;
@@ -14,6 +19,63 @@ body {
   cursor: pointer;
   font-size: 18px;
 }
+
+/* index.css */
+.task-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.task-header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.task-item.completed {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.task-button {
+  padding: 5px 10px;
+  font-size: 0.875rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.task-button.complete {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.task-button.delete {
+  background-color: #dc3545;
+  color: #fff;
+}
+
 .container {
   max-width: 800px; /* Increase the maximum width */
   margin: 50px auto;
