@@ -12,14 +12,11 @@ A simple, interactive to-do list application that allows users to add, delete, a
 ## 📂 Directory Structure
 
 ```bash
-└── saisriharsha2003-to_do_list/
-    ├── README.md
-    ├── index.html
-    ├── script.js
-    ├── styles.css
-    └── .github/
-        └── workflows/
-            └── static.yml
+saisriharsha2003-to_do_list/
+├── README.md    # Project documentation
+├── index.html   # Main HTML structure for the To-Do List
+├── script.js    # JavaScript logic for task management
+├── styles.css   # CSS file for styling the UI
 ```
 
 ## 🛠️ Tech Stack
