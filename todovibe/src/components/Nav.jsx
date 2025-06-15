@@ -12,7 +12,8 @@ const Nav = () => {
           </Link>
           <ul>
             <li><Link to="/" >Home</Link></li>
-            
+            <li><Link to="/add-task">Add Task</Link></li>
+            <li><Link to="/view-tasks">View Tasks</Link></li>
           </ul>
         </nav>
         </div>

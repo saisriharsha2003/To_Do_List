@@ -1,21 +1,19 @@
 import React from "react";
-import Nav from "../components/Nav"
+import Nav from "../components/Nav";
 import "../assets/styles/home.css";
 
 const Home = () => {
   return (
-    <div>
-      <div className="hero">
-        <Nav />
-      </div>
+    <>
+      <Nav  style={{"padding-bottom": "50px"}}/>
       <div className="bg1">
-        <div className="container" style={{ background: "black", opacity: 0.9 }}>
+        <div className="container">
           <p className="homep1">
-            Welcome to <span className="homep">NoteNexus</span>
+            Welcome to <span className="homep">TodoVibe</span>
           </p>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
