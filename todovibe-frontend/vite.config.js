@@ -11,6 +11,7 @@ export default defineConfig(() => {
     css: {
       postcss: path.resolve(__dirname, 'postcss.config.js'),
     },
-    base: '/To_Do_List/'
+    base: '/To_Do_List/',
+
   };
 });
