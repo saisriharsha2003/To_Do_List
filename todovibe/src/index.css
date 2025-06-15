@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==== General Styles ==== */
+
+body, .container1 {
+  @apply font-sans bg-gray-100 min-h-screen;
+  background-image: url("../src/assets/images/todolist.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+/* ==== Container ==== */
+
+.container{
+  background-color: grey;
+  opacity: 0.6;
+  width: 70%;
+}
+
+.task-container {
+  @apply max-w-2xl mx-auto mt-8 p-6 rounded-xl bg-white shadow-xl;
+}
+
+/* ==== Headings ==== */
+
+.task-header, h1 {
+  @apply text-2xl font-bold text-center text-gray-800 mb-4;
+}
+
+/* ==== Task Input Section ==== */
+
+.input-container {
+  @apply flex gap-4 mb-4 flex-wrap justify-center;
+}
+
+.input-container input[type="text"],
+.input-container input[type="date"] {
+  @apply p-3 border border-gray-300 rounded-md text-base w-full sm:w-auto;
+}
+
+#add {
+  @apply px-6 py-3 bg-blue-600 text-white rounded-md text-base font-medium hover:bg-blue-700 transition;
+}
+
+/* ==== Buttons ==== */
+
+button {
+  @apply px-5 py-2 bg-green-600 text-white rounded-md font-medium transition hover:bg-green-700;
+}
+
+.task-sections {
+  @apply flex justify-center gap-4 mt-6;
+}
+
+.task-sections button {
+  @apply px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-md transition;
+}
+
+/* ==== Task List ==== */
+
+#taskList {
+  @apply list-none p-0;
+}
+
+.task-item {
+  @apply flex justify-between items-center p-4 border border-gray-200 rounded-md mb-3 bg-gray-50 transition;
+}
+
+.task-item.completed {
+  @apply bg-green-100 text-green-600 line-through;
+}
+
+.task-name {
+  @apply flex-1 mr-4 text-base;
+}
+
+/* ==== Edit & Delete Buttons ==== */
+
+.task-button {
+  @apply text-sm px-3 py-1 rounded-md cursor-pointer;
+}
+
+.task-button.complete {
+  @apply bg-green-600 text-white hover:bg-green-700;
+}
+
+.task-button.delete {
+  @apply bg-red-600 text-white hover:bg-red-700;
+}
+
+.edit-task {
+  @apply mr-2 text-blue-600 hover:text-blue-800 cursor-pointer text-lg;
+}
+
+/* ==== Search Bar ==== */
+
+.search-container {
+  @apply flex justify-center mt-6;
+}
+
+.search-container input[type="text"] {
+  @apply p-3 border border-gray-300 rounded-md w-full sm:w-1/2 bg-white shadow-sm focus:outline-none focus:ring focus:ring-blue-300;
+}
+
+.search-container input::placeholder {
+  @apply text-gray-400;
+}
