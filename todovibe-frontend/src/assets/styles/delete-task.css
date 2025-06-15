@@ -1,0 +1,111 @@
+.delete-container {
+  background: url(../images/background_image1.png);
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 105vh;
+  width: 100%;
+  background-attachment: scroll;
+  background-position: center;
+}
+
+.delete-box {
+  background: white;
+  opacity: 0.9;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px #c2185b;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.delete-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.delete-img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+}
+
+.delete-title {
+  font-size: 26px;
+  font-weight: bold;
+  color: #c2185b;
+  text-shadow: 0px 2px 5px rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+}
+
+.delete-message p {
+  font-size: 18px;
+  font-weight: 600;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.cancel-button,
+.delete-button {
+  padding: 15px 0;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 50%;
+  transition: all 0.3s ease-in-out;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cancel-button {
+  background: linear-gradient(135deg, #28a745, #218838);
+  color: white;
+}
+
+.cancel-button:hover {
+  background: linear-gradient(135deg, #34d058, #1f7a31);
+  box-shadow: 0px 4px 10px rgba(40, 167, 69, 0.5);
+}
+
+.delete-button {
+  background: linear-gradient(135deg, #c2185b, #8e44ad);
+  color: white;
+}
+
+.delete-button:hover {
+  transform: translateX(-2px);
+  box-shadow: 0 6px 14px rgba(140, 40, 120, 0.3);
+  background: linear-gradient(-135deg, #c2185b, #8e44ad);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

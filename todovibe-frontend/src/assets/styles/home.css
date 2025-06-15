@@ -1,0 +1,83 @@
+.bg1 {
+  background: url("../images/background_image1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  background-position: center;
+  overflow: visible;
+}
+.hero {
+  background: white;
+  color: black;
+  position: relative;
+  width: 100%;
+}
+.container {
+  max-width: 700px;
+  width: 100%;
+  height: auto;
+  background: white;
+  padding: 30px 30px;
+  border-radius: 10px;
+  opacity: 0.9;
+  margin-bottom: 100px;
+}
+
+.container .title {
+  font-size: 30px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+
+  margin-bottom: 10px;
+  color: #c2185b;
+}
+
+.homep1 {
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.homep {
+  color: #c2185b;
+  overflow: hidden;
+  border-right: 2px solid black;
+  white-space: nowrap;
+  display: inline-block;
+  margin-left: 10px;
+  letter-spacing: 0.1em;
+  animation: typing 3.5s steps(20, end) infinite,
+    blink-caret 0.5s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 33%;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #c2185b;
+  }
+}

@@ -1,0 +1,188 @@
+.add-task-container {
+  background: url("../images/background_image1.png");
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 105vh;
+  width: 100%;
+  background-attachment: scroll;
+  background-position: center;
+}
+
+.add-task-box {
+  max-width: 900px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.6s ease-in-out;
+  backdrop-filter: blur(4px);
+}
+
+.add-task-box .title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 25px;
+  color: #c2185b;
+  letter-spacing: 1px;
+}
+
+.add-task-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.add-task-box .input-group {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-task-box .input-group.full-width {
+  flex: 1 1 100%;
+}
+
+.add-task-box .input-title {
+  font-weight: 600;
+  font-size: 15px;
+  color: #c2185b;
+  margin-bottom: 6px;
+  padding-left: 4px;
+}
+
+.add-task-box .input-wrapper {
+  display: flex;
+  align-items: center;
+  background: whitesmoke;
+  box-shadow: 0 0 8px rgba(194, 24, 91, 0.3);
+  border-radius: 10px;
+  padding: 14px 16px;
+  transition: box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+.add-task-box .input-wrapper:hover {
+  box-shadow: 0 0 8px rgba(194, 24, 91, 0.6);
+}
+
+.add-task-box .icon {
+  color: #c2185b;
+  font-size: 20px;
+  margin-right: 12px;
+}
+
+.add-task-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: black;
+  font-size: 16px;
+  padding: 6px 4px;
+}
+
+.add-task-box textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #333;
+  font-size: 16px;
+  padding: 6px 4px;
+  resize: vertical;
+}
+
+.add-task-box .custom-dropdown {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+}
+
+.add-task-box .custom-dropdown .react-select__control {
+  border: none;
+  border-radius: 8px;
+  box-shadow: none;
+  min-height: 48px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.add-task-box .custom-dropdown .react-select__control:hover {
+  transform: scale(1.03);
+  background-color: transparent;
+}
+
+.add-task-box .custom-dropdown .react-select__value-container {
+  color: black;
+  padding-left: 8px;
+}
+
+.add-task-box .custom-dropdown .react-select__single-value {
+  background: transparent;
+  color: black;
+}
+
+.add-task-box .custom-dropdown .react-select__indicator {
+  color: black;
+}
+
+.add-task-box .custom-dropdown .react-select__menu {
+  background-color: white;
+  color: black;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.add-task-box .custom-dropdown .react-select__option {
+  background-color: transparent;
+  color: black;
+  padding: 12px;
+  transition: background-color 0.2s;
+}
+
+.add-task-box .custom-dropdown .react-select__option--is-focused {
+  background-color: rgba(255, 0, 255, 0.6);
+  color: #fff;
+}
+
+.add-task-box .custom-dropdown .react-select__option--is-selected {
+  background-color: #d81b60;
+  color: #fff;
+}
+
+.add-task-box .add-task-btn {
+  background: linear-gradient(135deg, #c2185b, #8e44ad);
+  border: none;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  margin-top: 10px;
+}
+
+.add-task-box .add-task-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(140, 40, 120, 0.3);
+  background: linear-gradient(-135deg, #c2185b, #8e44ad);
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

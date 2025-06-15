@@ -1,0 +1,215 @@
+.edit-task-container {
+  background: url("../images/background_image1.png");
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 105vh;
+  width: 100%;
+  background-attachment: scroll;
+  background-position: center;
+}
+
+.edit-task-box {
+  max-width: 900px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.6s ease-in-out;
+  backdrop-filter: blur(4px);
+}
+
+.edit-task-box .title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 25px;
+  color: #c2185b;
+  letter-spacing: 1px;
+}
+
+.edit-task-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.edit-task-box .input-group {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-task-box .input-group.full-width {
+  flex: 1 1 100%;
+}
+
+.edit-task-box .input-title {
+  font-weight: 600;
+  font-size: 15px;
+  color: #c2185b;
+  margin-bottom: 6px;
+  padding-left: 4px;
+}
+
+.edit-task-box .input-wrapper {
+  display: flex;
+  align-items: center;
+  background: whitesmoke;
+  box-shadow: 0 0 8px rgba(194, 24, 91, 0.3);
+  border-radius: 10px;
+  padding: 14px 16px;
+  transition: box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+.edit-task-box .input-wrapper:hover {
+  box-shadow: 0 0 8px rgba(194, 24, 91, 0.6);
+}
+
+.edit-task-box .icon {
+  color: #c2185b;
+  font-size: 20px;
+  margin-right: 12px;
+}
+
+.edit-task-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: black;
+  font-size: 16px;
+  padding: 6px 4px;
+}
+
+.edit-task-box textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #333;
+  font-size: 16px;
+  padding: 6px 4px;
+  resize: vertical;
+}
+
+.edit-task-box .custom-dropdown {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+}
+
+.edit-task-box .custom-dropdown .react-select__control {
+  border: none;
+  border-radius: 8px;
+  box-shadow: none;
+  min-height: 48px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.edit-task-box .custom-dropdown .react-select__control:hover {
+  transform: scale(1.03);
+  background-color: transparent;
+}
+
+.edit-task-box .custom-dropdown .react-select__value-container {
+  color: black;
+  padding-left: 8px;
+}
+
+.edit-task-box .custom-dropdown .react-select__single-value {
+  background: transparent;
+  color: black;
+}
+
+.edit-task-box .custom-dropdown .react-select__indicator {
+  color: black;
+}
+
+.edit-task-box .custom-dropdown .react-select__menu {
+  background-color: white;
+  color: black;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.edit-task-box .custom-dropdown .react-select__option {
+  background-color: transparent;
+  color: black;
+  padding: 12px;
+  transition: background-color 0.2s;
+}
+
+.edit-task-box .custom-dropdown .react-select__option--is-focused {
+  background-color: rgba(255, 0, 255, 0.7);
+  color: #fff;
+}
+
+.edit-task-box .custom-dropdown .react-select__option--is-selected {
+  background-color: #d81b60;
+  color: #fff;
+}
+
+.edit-task-box .button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.edit-task-box .button-container .edit-task-btn,
+.edit-task-box .button-container .cancel-button {
+  padding: 15px 0;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 50%;
+  transition: all 0.3s ease-in-out;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-task-box .button-container .edit-task-btn {
+  background: linear-gradient(135deg, #c2185b, #8e44ad);
+  color: white;
+  text-transform: uppercase;
+}
+
+.edit-task-box .button-container .cancel-button {
+  background: #dc3545;
+  text-transform: uppercase;
+  color: white;
+}
+
+.edit-task-box .button-container .edit-task-btn:hover {
+  transform: translateX(-2px);
+  box-shadow: 0 6px 14px rgba(140, 40, 120, 0.3);
+  background: linear-gradient(-135deg, #c2185b, #8e44ad);
+}
+
+.edit-box .button-container .cancel-button:hover {
+  background: #c82333;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
