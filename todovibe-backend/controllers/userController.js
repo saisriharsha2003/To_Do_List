@@ -1,7 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 import Task from "../models/Task.js";
 import jwt from "jsonwebtoken";
-import { EMAIL_USER, JWT_SECRET } from "../config.js";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
