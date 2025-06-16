@@ -231,8 +231,3 @@ on every push to the `main` branch.
 
 [GitHub Profile](https://github.com/saisriharsha2003)
 
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
