@@ -141,9 +141,7 @@ const AddTask = () => {
                   classNamePrefix="react-select"
                 />
               </div>
-            </div>
-
-            
+            </div> 
 
             <motion.button
               whileHover={{ scale: 1.1 }}
