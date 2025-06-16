@@ -46,7 +46,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'todovibe-frontend/dist'  # Adjust to match actual build output
+          path: 'todovibe-frontend/build'  # Adjust to match actual build output
 
       - name: Deploy to GitHub Pages
         id: deployment
