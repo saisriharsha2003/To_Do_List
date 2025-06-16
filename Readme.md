@@ -87,7 +87,9 @@ saisriharsha2003-to_do_list/
     └── workflows/
         └── deploy.yml                     # GitHub Actions workflow for automatic deployment
 ```
+
 ---
+
 ## 🚀 Getting Started
 
 ### 📦 Clone the Repository
@@ -113,7 +115,7 @@ cd to_do_list
    npm install
    ```
 
-3. Create a `.env` file or set environment variables in a `config.js` (based on your structure):
+3. Create a `.env` file in the root directory of the `todovibe-backend` folder:
 
    ```
    MONGODB_URL=your_mongo_connection_string
@@ -126,7 +128,7 @@ cd to_do_list
    npm start
    ```
 
-   The backend will start on [http://localhost:8080](http://localhost:8080) (or as configured).
+   The backend will start on [http://localhost:8080](http://localhost:8080).
 
 ---
 
@@ -144,81 +146,10 @@ cd to_do_list
    npm install
    ```
 
-3. Configure the backend API URL in `src/config.js`:
+3. Configure the backend `BASE_URL` in `src/config.js`:
 
    ```js
-   export const API_URL = "http://localhost:8080/api";
-   ```
-
-4. Start the development server:
-
-   ```bash
-   npm run dev
-   ```
-
-   The frontend will be available at [http://localhost:5173](http://localhost:5173) by default (Vite's default port).
-
----
-## 🚀 Getting Started
-
-### 📦 Clone the Repository
-
-```bash
-git clone https://github.com/saisriharsha2003/to_do_list.git
-cd to_do_list
-```
-
----
-
-## ⚙️ Backend Setup (`todovibe-backend`)
-
-1. Navigate to the backend folder:
-
-   ```bash
-   cd todovibe-backend
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-3. Create a `.env` file or set environment variables in a `config.js` (based on your structure):
-
-   ```
-   MONGODB_URL=your_mongo_connection_string
-   JWT_SECRET=your_jwt_secret
-   ```
-
-4. Start the server:
-
-   ```bash
-   npm start
-   ```
-
-   The backend will start on [http://localhost:8080](http://localhost:8080) (or as configured).
-
----
-
-## 💻 Frontend Setup (`todovibe-frontend`)
-
-1. Navigate to the frontend folder:
-
-   ```bash
-   cd ../todovibe-frontend
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-3. Configure the backend API URL in `src/config.js`:
-
-   ```js
-   export const API_URL = "http://localhost:8080/api";
+   export const BASE_URL = "http://localhost:8080";
    ```
 
 4. Start the development server:
